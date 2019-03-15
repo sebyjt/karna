@@ -7,11 +7,15 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_logo"
-        android:label="KARNA"
+        android:label="Karna"
         android:roundIcon="@mipmap/ic_logo_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".service_main">
+        </activity>
+        <activity android:name=".MainActivity">
+        </activity>
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
