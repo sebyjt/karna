@@ -1,5 +1,6 @@
 package in.iodev.karna;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -17,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -39,7 +41,8 @@ public class Home extends AppCompatActivity {
     JSONArray array;
     JSONObject object2;
     Recycleadapter adapter;
-
+    boolean running=false;
+    Button start;
     String percent,user;
     SharedPreferences preferences;
     TextView ads,gain,generate,donate,name,percentage;
@@ -51,6 +54,7 @@ public class Home extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         ngolist=findViewById(R.id.ngolist);
+        start=findViewById(R.id.start);
         ngolist.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !Settings.canDrawOverlays(this)) {
 
@@ -62,6 +66,13 @@ public class Home extends AppCompatActivity {
         }
 
         preferences=getDefaultSharedPreferences(getApplicationContext());
+        running=preferences.getBoolean("running",false);
+        if(running)
+        {
+            start.setText("stop");
+        }
+        else
+            start.setText("start");
         user=preferences.getString("user","");
         ads=findViewById(R.id.adsviewed);
         gain=findViewById(R.id.gained);
@@ -72,11 +83,11 @@ public class Home extends AppCompatActivity {
         if(preferences.contains("firstsignin"))
         {
             percent="25";
-            JSONObject items=null;
+            JSONObject items=new JSONObject();
             try {
                 items.put("Username",preferences.getString("user",""));
                 items.put("Percentage",String.valueOf(percent));
-                String url="https://6ghfrrqsb3.execute-api.ap-south-1.amazonaws.com/Dev/userdetails/setpercentage";
+                String url="https://9nvv7wpamb.execute-api.ap-southeast-1.amazonaws.com/Development/update-percentage";
 
                 new HTTPAsyncTask().execute(url,items.toString());
             } catch (JSONException e) {
@@ -103,19 +114,48 @@ public class Home extends AppCompatActivity {
             e.printStackTrace();
         }
         new HTTPAsyncTask2().execute("https://6ghfrrqsb3.execute-api.ap-south-1.amazonaws.com/Dev/ngo/list",object.toString());
+        start.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(running==false)
+                {  dialog dialogBox = new dialog(Home.this,percent);
+                dialogBox.show();
+
+                //Adding width and blur
+                Window window=dialogBox.getWindow();
+                WindowManager.LayoutParams lp = dialogBox.getWindow().getAttributes();
+                lp.dimAmount=0.8f;
+                dialogBox.getWindow().setAttributes(lp);
+                window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                dialogBox.setCanceledOnTouchOutside(false);
+                dialogBox.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                    @Override
+                    public void onCancel(DialogInterface dialog) {
+                        start.setText("Stop");
+                        running=true;
+                        preferences.edit().putBoolean("running",true).apply();
+                        JSONObject object2=new JSONObject();
+                        try {
+
+                            object2.put("Username",preferences.getString("user",""));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        new HTTPAsyncTask3().execute("https://9nvv7wpamb.execute-api.ap-southeast-1.amazonaws.com/Development/get-userdetails",object2.toString());
+                    }
+                });
+        }
+        else {
+            stop(v);
+            running=false;
+                    preferences.edit().putBoolean("running",false).apply();
+            start.setText("start");
+
+                }
+            }
+        });
 
 
-    }
-
-    public void getpercent(View view) {
-        dialog dialogBox = new dialog(view.getContext(),percent);
-        dialogBox.show();
-        //Adding width and blur
-        Window window=dialogBox.getWindow();
-        WindowManager.LayoutParams lp = dialogBox.getWindow().getAttributes();
-        lp.dimAmount=0.8f;
-        dialogBox.getWindow().setAttributes(lp);
-        window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
     }
 
     public void stop(View view) {
@@ -242,7 +282,7 @@ public class Home extends AppCompatActivity {
         }}
 
 
-    class HTTPAsyncTask3 extends AsyncTask<String, Void, String> {
+    public  class HTTPAsyncTask3 extends AsyncTask<String, Void, String> {
         String response="Network Error";
 
         @Override

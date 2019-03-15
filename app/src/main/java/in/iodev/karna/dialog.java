@@ -55,6 +55,15 @@ public class dialog  extends Dialog {
         });
         seekBar.setProgress(Integer.parseInt(percent));
         seektext.setText(percent+"%");
+        user=preferences.getString("user","");
+
+        try {
+            items.put("Username",preferences.getString("user",""));
+            items.put("Percentage",percent);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener(){
 
             @Override
@@ -62,15 +71,12 @@ public class dialog  extends Dialog {
                                           boolean fromUser) {
                 // TODO Auto-generated method stub
                 seektext.setText(String.valueOf(progress));
-
-                user=preferences.getString("user","");
-                percent= String.valueOf(progress);
                 try {
-                    items.put("Username",preferences.getString("user",""));
                     items.put("Percentage",String.valueOf(progress));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+
 
             }
 
@@ -121,8 +127,20 @@ public class dialog  extends Dialog {
                 {preferences.edit().putString(user,percent).apply();
                     Intent serviceIntent = new Intent(context, ExampleService.class);
 
+                    JSONObject object2=new JSONObject();
+                    try {
 
-                    ContextCompat.startForegroundService(context, serviceIntent);
+                        object2.put("Username",preferences.getString("user",""));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    try {
+                        ContextCompat.startForegroundService(context, serviceIntent);
+                    }
+                    catch (Exception e)
+                    {
+
+                    }
                 dialog.this.cancel();
 
                             }

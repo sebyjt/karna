@@ -269,23 +269,14 @@
     android:layout_marginBottom="5dp"
     android:orientation="horizontal">
     <Button
+        android:id="@+id/start"
         android:layout_margin="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
         android:background="@color/colorPrimaryDark"
-        android:onClick="getpercent"
         android:text="start"
         android:textColor="@android:color/white"
         android:visibility="visible" />
-    <Button
-        android:layout_margin="5dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:background="@color/colorPrimaryDark"
-        android:onClick="stop"
-        android:text="stop"
-        android:textColor="@android:color/white"
-        android:visibility="visible" /></LinearLayout>
+</LinearLayout>
 </RelativeLayout>
