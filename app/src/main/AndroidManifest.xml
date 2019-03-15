@@ -13,20 +13,20 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Home">
-        </activity>
-        <activity android:name=".MainActivity">
-        </activity>
-        <activity android:name=".LoginActivity">
-        </activity>
-        <activity android:name=".service_main">
-        </activity>
-        <service android:name=".ExampleService" />
-        <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".MainActivity">
+        </activity>
+
+        <activity android:name=".LoginActivity">
+        </activity>
+        <service android:name=".ExampleService" />
+        <activity android:name=".SplashScreen">
+
         </activity>
         <service
             android:name="in.iodev.karna.FloatingService"

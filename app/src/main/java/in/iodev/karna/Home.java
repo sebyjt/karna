@@ -1,8 +1,12 @@
 package in.iodev.karna;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -40,16 +44,24 @@ public class Home extends AppCompatActivity {
     SharedPreferences preferences;
     TextView ads,gain,generate,donate,name,percentage;
     private static final int IO_BUFFER_SIZE = 4 * 1024;
+    private static final int CODE_DRAW_OVER_OTHER_APP_PERMISSION = 2084;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         ngolist=findViewById(R.id.ngolist);
         ngolist.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !Settings.canDrawOverlays(this)) {
 
+            //If the draw over permission is not available open the settings screen
+            //to grant the permission.
+            Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                    Uri.parse("package:" + getPackageName()));
+            startActivityForResult(intent, CODE_DRAW_OVER_OTHER_APP_PERMISSION);
+        }
 
         preferences=getDefaultSharedPreferences(getApplicationContext());
-        preferences.edit().putString("user","Seby").apply();
         user=preferences.getString("user","");
         ads=findViewById(R.id.adsviewed);
         gain=findViewById(R.id.gained);
@@ -96,9 +108,7 @@ public class Home extends AppCompatActivity {
     }
 
     public void getpercent(View view) {
-        dialog dialogBox= null;
-
-            dialogBox = new dialog(view.getContext(),percent);
+        dialog dialogBox = new dialog(view.getContext(),percent);
         dialogBox.show();
         //Adding width and blur
         Window window=dialogBox.getWindow();
@@ -106,6 +116,12 @@ public class Home extends AppCompatActivity {
         lp.dimAmount=0.8f;
         dialogBox.getWindow().setAttributes(lp);
         window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+    }
+
+    public void stop(View view) {
+        Intent serviceIntent = new Intent(this, ExampleService.class);
+
+        stopService(serviceIntent);
     }
 
     class HTTPAsyncTask2 extends AsyncTask<String, Void, String> {

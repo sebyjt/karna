@@ -2,9 +2,12 @@ package in.iodev.karna;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -23,11 +26,13 @@ public class dialog  extends Dialog {
     TextView seektext;
     String user,percent;
     SharedPreferences preferences;
-    public ImageView im;
+    public CardView im;
+    Context context;
     private JSONObject items=new JSONObject();
 
     public dialog( Context context,String percent) {
         super(context);this.percent=percent;
+        this.context=context;
     }
 
     @Override
@@ -38,12 +43,12 @@ public class dialog  extends Dialog {
         preferences=getDefaultSharedPreferences(getContext());
         seektext=findViewById(R.id.seektext);
         seekBar=findViewById(R.id.seekBar);
-        im=findViewById(R.id.imsub);
+        im=findViewById(R.id.img);
 
         im.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String url="https://6ghfrrqsb3.execute-api.ap-south-1.amazonaws.com/Dev/userdetails/setpercentage";
+                String url="https://9nvv7wpamb.execute-api.ap-southeast-1.amazonaws.com/Development/update-percentage";
 
                 new HTTPAsyncTask2().execute(url,items.toString());
             }
@@ -114,6 +119,10 @@ public class dialog  extends Dialog {
                 responseObject = new JSONObject(response);
                 if(responseObject.getString("Username").equals(user))
                 {preferences.edit().putString(user,percent).apply();
+                    Intent serviceIntent = new Intent(context, ExampleService.class);
+
+
+                    ContextCompat.startForegroundService(context, serviceIntent);
                 dialog.this.cancel();
 
                             }

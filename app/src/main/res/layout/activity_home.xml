@@ -19,7 +19,7 @@
     android:text="Home"
     android:textSize="32dp"
     android:textStyle="bold"
-    android:textColor="#066AA6"/>
+    android:textColor="@color/colorPrimary"/>
 <HorizontalScrollView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -40,7 +40,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#066AA6"
+            android:background="@color/colorPrimary"
             android:orientation="vertical">
 
             <TextView
@@ -75,7 +75,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#066AA6"
+            android:background="@color/colorPrimary"
             android:orientation="vertical">
 
             <TextView
@@ -110,7 +110,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#066AA6"
+            android:background="@color/colorPrimary"
             android:orientation="vertical">
 
             <TextView
@@ -146,7 +146,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
 
-            android:background="#066AA6"
+            android:background="@color/colorPrimary"
             android:orientation="vertical">
 
             <TextView
@@ -182,7 +182,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
 
-            android:background="#066AA6"
+            android:background="@color/colorPrimary"
             android:orientation="vertical">
 
             <TextView
@@ -218,7 +218,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
 
-            android:background="#066AA6"
+            android:background="@color/colorPrimary"
             android:orientation="vertical">
 
             <TextView
@@ -254,23 +254,38 @@
         android:text="NGO's"
         android:textSize="32dp"
         android:textStyle="bold"
-        android:textColor="#066AA6"/>
+        android:textColor="@color/colorPrimary"/>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/ngolist"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"></android.support.v7.widget.RecyclerView></LinearLayout>
-
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:layout_centerHorizontal="true"
+    android:layout_marginBottom="5dp"
+    android:orientation="horizontal">
     <Button
+        android:layout_margin="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="5dp"
-        android:background="#298FCF"
+
+        android:background="@color/colorPrimaryDark"
         android:onClick="getpercent"
         android:text="start"
         android:textColor="@android:color/white"
         android:visibility="visible" />
+    <Button
+        android:layout_margin="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:background="@color/colorPrimaryDark"
+        android:onClick="stop"
+        android:text="stop"
+        android:textColor="@android:color/white"
+        android:visibility="visible" /></LinearLayout>
 </RelativeLayout>
