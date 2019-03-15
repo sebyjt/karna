@@ -42,6 +42,7 @@ public class service_main extends AppCompatActivity {
 
     public void stopService(View v) {
         Intent serviceIntent = new Intent(this, ExampleService.class);
+
         stopService(serviceIntent);
     }
 }
