@@ -13,6 +13,8 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class ExampleService extends Service {
@@ -53,21 +55,36 @@ public class ExampleService extends Service {
 
         startForeground(2, notification);
 
+
+
+
         //do heavy work on a background thread
         //stopSelf();
+        long after=500,interval=500;
+        new Timer().scheduleAtFixedRate(timerTask,after,interval);
+
 
         return START_NOT_STICKY;
     }
+  TimerTask timerTask=new TimerTask() {
+      @Override
+      public void run() {
+          Log.d("test","test");
+      }
+  };
+
 
     @Override
     public void onDestroy() {
         super.onDestroy();
+        timerTask.cancel();
+
     }
 
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
-        Log.d("test","");
+
         return null;
     }
 }
