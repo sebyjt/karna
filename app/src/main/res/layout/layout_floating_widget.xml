@@ -47,7 +47,7 @@
             android:background="#F8BBD0"
             android:orientation="horizontal"
             android:padding="8dp"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <!--Album image for the song currently playing.-->
             <ImageView

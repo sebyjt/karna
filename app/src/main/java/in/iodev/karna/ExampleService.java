@@ -27,7 +27,7 @@ public class ExampleService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        startService(new Intent(ExampleService.this, FloatingService.class));
+
 
         String input = intent.getStringExtra("inputExtra");
         Log.d(input,"");
@@ -60,7 +60,7 @@ public class ExampleService extends Service {
 
         //do heavy work on a background thread
         //stopSelf();
-        long after=500,interval=500;
+        long after=5000,interval=5000;
         new Timer().scheduleAtFixedRate(timerTask,after,interval);
 
 
@@ -69,7 +69,7 @@ public class ExampleService extends Service {
   TimerTask timerTask=new TimerTask() {
       @Override
       public void run() {
-          Log.d("test","test");
+          startService(new Intent(ExampleService.this, FloatingService.class));
       }
   };
 
@@ -78,6 +78,10 @@ public class ExampleService extends Service {
     public void onDestroy() {
         super.onDestroy();
         timerTask.cancel();
+        Intent floatingIntent = new Intent(ExampleService.this, FloatingService.class);
+        stopService(floatingIntent);
+
+
 
     }
 
