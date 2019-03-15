@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "791941464258",
+    "firebase_url": "https://karnakodekochi.firebaseio.com",
+    "project_id": "karnakodekochi",
+    "storage_bucket": "karnakodekochi.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:791941464258:android:9f605748b5f40295",
+        "android_client_info": {
+          "package_name": "in.iodev.karna"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "791941464258-1rrlb8d72ug6q5gira8h5du3a05st56h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "in.iodev.karna",
+            "certificate_hash": "a8865fbba79f98e7ec508027480b9a67c8d4818c"
+          }
+        },
+        {
+          "client_id": "791941464258-omtg5bvlsgna6ucre5mdn7rq17f18aqs.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "in.iodev.karna",
+            "certificate_hash": "ae361c627318099b6b70b6efd13254d0277e98d9"
+          }
+        },
+        {
+          "client_id": "791941464258-s2k55c216hauu27fd9dvu6qdrne9eclc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBbaHQdwMjeu2MQvSH7FSD8468kSL4fBoE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "791941464258-s2k55c216hauu27fd9dvu6qdrne9eclc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
