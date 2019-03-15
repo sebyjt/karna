@@ -25,6 +25,8 @@ public class ExampleService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        startService(new Intent(ExampleService.this, FloatingService.class));
+
         String input = intent.getStringExtra("inputExtra");
         Log.d(input,"");
 
@@ -65,6 +67,7 @@ public class ExampleService extends Service {
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
+        Log.d("test","");
         return null;
     }
 }
