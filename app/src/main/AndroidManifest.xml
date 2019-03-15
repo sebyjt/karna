@@ -32,6 +32,9 @@
             android:name="in.iodev.karna.FloatingService"
             android:enabled="true"
             android:exported="false"/>
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="YOUR_ADMOB_APP_ID"/>
     </application>
 
 </manifest>
