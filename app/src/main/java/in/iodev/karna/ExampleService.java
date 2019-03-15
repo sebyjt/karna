@@ -29,9 +29,6 @@ public class ExampleService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
 
 
-        String input = intent.getStringExtra("inputExtra");
-        Log.d(input,"");
-
         Intent notificationIntent = new Intent(this, MainActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(this,
                 0, notificationIntent, 0);
@@ -47,8 +44,8 @@ public class ExampleService extends Service {
         }
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, CHANNEL_ID);
         Notification notification = notificationBuilder.setOngoing(true)
-                .setSmallIcon(R.drawable.ic_android_circle)
-                .setContentTitle("App is running in background")
+                .setSmallIcon(R.drawable.karna)
+                .setContentTitle("Ads will run in background")
                 .setPriority(NotificationManager.IMPORTANCE_MIN)
                 .setCategory(Notification.CATEGORY_SERVICE)
                 .build();

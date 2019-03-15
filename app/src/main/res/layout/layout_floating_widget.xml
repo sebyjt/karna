@@ -26,7 +26,7 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_marginTop="8dp"
-                android:src="@drawable/ic_android_circle"
+                android:src="@mipmap/ic_logo_round"
                 tools:ignore="ContentDescription"/>
 
             <!--Close button-->
@@ -40,21 +40,26 @@
         </RelativeLayout>
 
         <!--View while view is expanded-->
+
         <LinearLayout
             android:id="@+id/expanded_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="#F8BBD0"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:padding="8dp"
-            android:visibility="gone">
 
-            <!--Album image for the song currently playing.-->
+            android:visibility="gone">
             <ImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:src="@drawable/music_player"
-                tools:ignore="ContentDescription" />
+                android:layout_width="match_parent"
+                android:layout_height="200.0dp"
+                android:src="@drawable/kdk"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
 
             <!--Previous button-->
             <ImageView
@@ -104,6 +109,7 @@
                     android:layout_alignParentBottom="true"
                     android:src="@drawable/ic_open" />
             </RelativeLayout>
+        </LinearLayout>
         </LinearLayout>
     </RelativeLayout>
 </FrameLayout>

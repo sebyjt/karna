@@ -11,7 +11,7 @@ import android.view.View;
 import android.widget.EditText;
 
 public class service_main extends AppCompatActivity {
-    private EditText editTextInput;
+
     private static final int CODE_DRAW_OVER_OTHER_APP_PERMISSION = 2084;
 
     @Override
@@ -19,7 +19,6 @@ public class service_main extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.service_main);
 
-        editTextInput = findViewById(R.id.edit_text_input);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !Settings.canDrawOverlays(this)) {
 
             //If the draw over permission is not available open the settings screen
@@ -31,10 +30,10 @@ public class service_main extends AppCompatActivity {
     }
 
     public void startService(View v) {
-        String input = editTextInput.getText().toString();
+
 
         Intent serviceIntent = new Intent(this, ExampleService.class);
-        serviceIntent.putExtra("inputExtra", input);
+
 
         ContextCompat.startForegroundService(this, serviceIntent);
 
