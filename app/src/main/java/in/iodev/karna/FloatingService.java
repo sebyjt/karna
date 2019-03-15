@@ -19,7 +19,7 @@ public class FloatingService extends Service {
 
     public FloatingService() {
     }
-
+//Test
     @Override
     public IBinder onBind(Intent intent) {
         return null;
