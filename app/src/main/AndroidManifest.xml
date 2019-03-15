@@ -3,15 +3,16 @@
     package="in.iodev.karna">
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.INTERNET"/>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_logo"
-        android:label="Karna"
+        android:label="KARNA"
         android:roundIcon="@mipmap/ic_logo_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".service_main">
+        <activity android:name=".Home">
         </activity>
         <activity android:name=".MainActivity">
         </activity>

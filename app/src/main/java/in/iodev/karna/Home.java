@@ -3,6 +3,7 @@ package in.iodev.karna;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,6 +15,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -22,6 +24,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 
 public class Home extends AppCompatActivity {
@@ -29,17 +35,28 @@ public class Home extends AppCompatActivity {
     JSONArray array;
     JSONObject object2;
     Recycleadapter adapter;
+
     String percent,user;
     SharedPreferences preferences;
-    TextView ads,gain,generate,donate;
+    TextView ads,gain,generate,donate,name,percentage;
     private static final int IO_BUFFER_SIZE = 4 * 1024;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         ngolist=findViewById(R.id.ngolist);
+        ngolist.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+
+
         preferences=getDefaultSharedPreferences(getApplicationContext());
+        preferences.edit().putString("user","Seby").apply();
         user=preferences.getString("user","");
+        ads=findViewById(R.id.adsviewed);
+        gain=findViewById(R.id.gained);
+        donate=findViewById(R.id.donated);
+        generate=findViewById(R.id.generate);
+        name=findViewById(R.id.username);
+        percentage=findViewById(R.id.percent);
         if(preferences.contains("firstsignin"))
         {
             percent="25";
@@ -63,15 +80,11 @@ public class Home extends AppCompatActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            new HTTPAsyncTask3().execute("https://6ghfrrqsb3.execute-api.ap-south-1.amazonaws.com/Dev/userdetails",object2.toString());
+            new HTTPAsyncTask3().execute("https://9nvv7wpamb.execute-api.ap-southeast-1.amazonaws.com/Development/get-userdetails",object2.toString());
         }
         adapter=new Recycleadapter();
         JSONObject object=new JSONObject();
 
-        ads=findViewById(R.id.adsviewed);
-        gain=findViewById(R.id.gained);
-        donate=findViewById(R.id.donated);
-        generate=findViewById(R.id.generated);
         try {
             object.put("","");
         } catch (JSONException e) {
@@ -130,7 +143,6 @@ public class Home extends AppCompatActivity {
                 array=responseObject.getJSONArray("Data");
                 Log.i("sample", String.valueOf(array.length()));
                 ngolist.setAdapter(adapter);
-                ngolist.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                 adapter.notifyDataSetChanged();
 
             } catch (JSONException e) {
@@ -181,7 +193,7 @@ public class Home extends AppCompatActivity {
 
         @Override
         public long getItemId(int i) {
-            return i;
+            return 0;
         }
 
         @Override
@@ -212,6 +224,8 @@ public class Home extends AppCompatActivity {
                 check=findViewById(R.id.checkbox);
      }
         }}
+
+
     class HTTPAsyncTask3 extends AsyncTask<String, Void, String> {
         String response="Network Error";
 
@@ -244,13 +258,15 @@ public class Home extends AppCompatActivity {
             JSONObject responseObject;
             try {
                 responseObject = new JSONObject(response);
-
-                 object2=responseObject.getJSONObject("Data");
-                 percent=object2.getString("Percentage");
+                object2=responseObject.getJSONObject("Data");
+                percent=object2.getString("Percentage");
+                percentage.setText(percent);
+                name.setText(object2.getString("Username"));
                 ads.setText(object2.getString("AdsViewed"));
                 gain.setText(object2.getString("MoneyGained"));
                 donate.setText(object2.getString("MoneyDonated"));
                 generate.setText(object2.getString("MoneyGenerated"));
+
 
 
 
