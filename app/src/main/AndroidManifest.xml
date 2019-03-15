@@ -16,9 +16,9 @@
         </activity>
         <activity android:name=".MainActivity">
         </activity>
-        <activity android:name=".Home">
-        </activity>
         <activity android:name=".LoginActivity">
+        </activity>
+        <activity android:name=".service_main">
         </activity>
         <service android:name=".ExampleService" />
         <activity android:name=".SplashScreen">
@@ -34,7 +34,7 @@
             android:exported="false"/>
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="YOUR_ADMOB_APP_ID"/>
+            android:value="ca-app-pub-1679831017133510~1635159227"/>
     </application>
 
 </manifest>
