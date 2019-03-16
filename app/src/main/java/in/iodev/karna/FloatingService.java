@@ -42,6 +42,7 @@ public class FloatingService extends Service {
     private boolean AdsOn=true;
     private ImageView BannerImage;
     SharedPreferences preferences;
+    JSONObject object;
     Timer timer;
     public FloatingService() {
     }
@@ -294,6 +295,10 @@ public class FloatingService extends Service {
             JSONObject responseObject;
             try {
                 responseObject = new JSONObject(response);
+                object=new JSONObject();
+                object.put("Username",preferences.getString("user",""));
+                object.put("ADS_ID",responseObject.getString("ADS_ID"));
+                new Getdetails().execute("https://9nvv7wpamb.execute-api.ap-southeast-1.amazonaws.com/Development/get-details",object.toString());
                 URL url = new URL(responseObject.getString("ImageURL"));
 
                 Picasso.get()
@@ -305,6 +310,45 @@ public class FloatingService extends Service {
                 e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
+            }
+        }
+
+
+    }
+    class Getdetails extends AsyncTask<String, Void, String> {
+        String response="Network Error";
+
+        @Override
+        protected String doInBackground(String... urls) {
+            // params comes from the execute() call: params[0] is the url.
+
+            try {
+                response= HTTPPostGet.getJsonResponse(urls[0],urls[1]);
+                Log.i("response",response.toString());
+                return response;
+            } catch (Exception e) {
+                e.printStackTrace();
+                return "Error!";
+            }
+            finally {
+
+            }
+
+        }
+        @Override
+        protected void onPreExecute() {
+
+        }
+
+        // onPostExecute displays the results of the AsyncTask.
+        @Override
+        protected void onPostExecute(String result) {
+
+            JSONObject responseObject;
+            try {
+            }
+            catch (Exception e){
+
             }
         }
 

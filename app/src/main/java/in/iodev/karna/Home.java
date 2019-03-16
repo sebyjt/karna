@@ -85,12 +85,11 @@ public class Home extends AppCompatActivity {
         if(preferences.getBoolean("firstsignin",false))
         {
             percent="25";
-            preferences.edit().putString("user","molly").apply();
             JSONObject items=new JSONObject();
             try {
                 items.put("Username",preferences.getString("user",""));
                 items.put("DisplayName",preferences.getString("DisplayName",""));
-                items.put("Percentage",String.valueOf(percent));
+                items.put("Percentage",percent);
                 String url="https://9nvv7wpamb.execute-api.ap-southeast-1.amazonaws.com/Development/update-percentage";
 
                 new HTTPAsyncTask().execute(url,items.toString());
@@ -104,6 +103,9 @@ public class Home extends AppCompatActivity {
             try {
 
                 object2.put("Username",preferences.getString("user",""));
+                object2.put("DisplayName",preferences.getString("DisplayName",""));
+                object2.put("Percentage",preferences.getString(percent,""));
+                Log.d("test seby",preferences.getString("user",""));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -326,12 +328,12 @@ public class Home extends AppCompatActivity {
                 responseObject = new JSONObject(response);
                 object2=responseObject.getJSONObject("Data");
                 percent=object2.getString("Percentage");
-                percentage.setText(percent);
+                percentage.setText(percent+"%");
                 name.setText(object2.getString("DisplayName"));
                 ads.setText(object2.getString("AdsViewed"));
-                gain.setText(object2.getString("MoneyGained"));
-                donate.setText(object2.getString("MoneyDonated"));
-                generate.setText(object2.getString("MoneyGenerated"));
+                gain.setText("₹"+object2.getString("MoneyGained"));
+                donate.setText("₹"+object2.getString("MoneyDonated"));
+                generate.setText("₹" +object2.getString("MoneyGenerated"));
 
 
 
@@ -378,13 +380,12 @@ public class Home extends AppCompatActivity {
                 {preferences.edit().putString(user,percent).apply();
                     object2=responseObject;
                     percent=object2.getString("Percentage");
-                    percentage.setText(percent);
+                    percentage.setText(percent+"%");
                     name.setText(object2.getString("DisplayName"));
                     ads.setText(object2.getString("AdsViewed"));
-                    gain.setText(object2.getString("MoneyGained"));
-                    donate.setText(object2.getString("MoneyDonated"));
-                    generate.setText(object2.getString("MoneyGenerated"));
-
+                    gain.setText("₹"+object2.getString("MoneyGained"));
+                    donate.setText("₹"+object2.getString("MoneyDonated"));
+                    generate.setText("₹" +object2.getString("MoneyGenerated"));
 
                 }
 

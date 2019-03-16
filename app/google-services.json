@@ -31,6 +31,14 @@
           }
         },
         {
+          "client_id": "791941464258-fndhc3nr9r3nvvi1u4eg3cl14c0phe9e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "in.iodev.karna",
+            "certificate_hash": "59f4539a9ca1225af38145d0e422bc76c264c0d4"
+          }
+        },
+        {
           "client_id": "791941464258-s2k55c216hauu27fd9dvu6qdrne9eclc.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -48,7 +56,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "791941464258-s2k55c216hauu27fd9dvu6qdrne9eclc.apps.googleusercontent.com",
+              "client_id": "791941464258-kesecotp9h1khjpa74jumu8hmuo5tuaj.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
