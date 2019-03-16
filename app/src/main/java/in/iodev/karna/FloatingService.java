@@ -42,7 +42,7 @@ public class FloatingService extends Service {
     private boolean AdsOn=true;
     private ImageView BannerImage;
     SharedPreferences preferences;
-
+    Timer timer;
     public FloatingService() {
     }
 
@@ -56,6 +56,7 @@ public class FloatingService extends Service {
     public void onCreate() {
         super.onCreate();
         //Inflate the floating view layout we created
+     timer = new Timer();
         mFloatingView = LayoutInflater.from(this).inflate(R.layout.layout_floating_widget, null);
         preferences=getDefaultSharedPreferences(getApplicationContext());
         //Add the view to the window.
@@ -94,7 +95,7 @@ public class FloatingService extends Service {
                 PlayButton.setVisibility(View.GONE);
             }
         });
-        Timer timer = new Timer();
+
         timer.scheduleAtFixedRate(
                 new java.util.TimerTask() {
                     @Override
@@ -252,6 +253,14 @@ public class FloatingService extends Service {
 //        return mFloatingView == null || mFloatingView.findViewById(R.id.collapse_view).getVisibility() == View.VISIBLE;
 //    }
 //
+    }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        timer.cancel();
+        if (mFloatingView != null) mWindowManager.removeView(mFloatingView);
+
+
     }
     class AdCall extends AsyncTask<String, Void, String> {
         String response="Network Error";

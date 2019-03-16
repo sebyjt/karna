@@ -85,6 +85,7 @@ public class Home extends AppCompatActivity {
         if(preferences.getBoolean("firstsignin",false))
         {
             percent="25";
+            preferences.edit().putString("user","molly").apply();
             JSONObject items=new JSONObject();
             try {
                 items.put("Username",preferences.getString("user",""));
@@ -120,7 +121,9 @@ public class Home extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(running==false)
-                {  dialog dialogBox = new dialog(Home.this,percent);
+                {
+                    Log.d("login",percent);
+                    dialog dialogBox = new dialog(Home.this,percent);
                 dialogBox.show();
 
                 //Adding width and blur
@@ -162,8 +165,12 @@ public class Home extends AppCompatActivity {
 
     public void stop(View view) {
         Intent serviceIntent = new Intent(this, ExampleService.class);
+        Intent floatintent = new Intent(this, FloatingService.class);
+
+
 
         stopService(serviceIntent);
+        stopService(floatintent);
     }
 
     class HTTPAsyncTask2 extends AsyncTask<String, Void, String> {
@@ -368,6 +375,14 @@ public class Home extends AppCompatActivity {
                 responseObject = new JSONObject(response);
                 if(responseObject.getString("Username").equals(user))
                 {preferences.edit().putString(user,percent).apply();
+                    object2=responseObject;
+                    percent=object2.getString("Percentage");
+                    percentage.setText(percent);
+                    name.setText(object2.getString("Username"));
+                    ads.setText(object2.getString("AdsViewed"));
+                    gain.setText(object2.getString("MoneyGained"));
+                    donate.setText(object2.getString("MoneyDonated"));
+                    generate.setText(object2.getString("MoneyGenerated"));
 
 
                 }

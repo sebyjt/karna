@@ -19,7 +19,7 @@ import java.util.TimerTask;
 
 public class ExampleService extends Service {
     public static final String CHANNEL_ID = "exampleServiceChannel";
-
+    Intent floatingIntent;
     @Override
     public void onCreate() {
         super.onCreate();
@@ -27,6 +27,7 @@ public class ExampleService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+   floatingIntent = new Intent(ExampleService.this, FloatingService.class);
 
 
         Intent notificationIntent = new Intent(this, MainActivity.class);
@@ -66,7 +67,9 @@ public class ExampleService extends Service {
   TimerTask timerTask=new TimerTask() {
       @Override
       public void run() {
-          startService(new Intent(ExampleService.this, FloatingService.class));
+
+          startService(new Intent(floatingIntent));
+          Log.d("yo","test");
       }
   };
 
@@ -74,9 +77,10 @@ public class ExampleService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        timerTask.cancel();
-        Intent floatingIntent = new Intent(ExampleService.this, FloatingService.class);
         stopService(floatingIntent);
+        timerTask.cancel();
+
+
 
 
 

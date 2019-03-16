@@ -16,11 +16,11 @@
 
         <!--View while view is collapsed-->
         <ImageView
-            android:visibility="gone"
             android:id="@+id/bannerImage"
             android:layout_width="320dp"
             android:layout_height="50dp"
-            android:contentDescription="Banner Ads"/>
+            android:contentDescription="Banner Ads"
+            android:visibility="visible" />
         <Button
             android:visibility="gone"
             android:id="@+id/pausebtn"
