@@ -11,7 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:ignore="UselessParent"
-        android:gravity="center_vertical"
         android:orientation="horizontal">
 
         <!--View while view is collapsed-->
@@ -33,6 +32,6 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:gravity="center"
-            android:background="@drawable/play"/>
+            android:background="@drawable/ic_logo_round"/>
     </LinearLayout>
 </FrameLayout>
