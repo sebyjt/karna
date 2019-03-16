@@ -261,22 +261,28 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"></android.support.v7.widget.RecyclerView></LinearLayout>
+    <android.support.v7.widget.CardView
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="5dp"
+        app:cardCornerRadius="25dp">
 <LinearLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_alignParentBottom="true"
-    android:layout_centerHorizontal="true"
-    android:layout_marginBottom="5dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
+
     android:orientation="horizontal">
     <Button
         android:id="@+id/start"
         android:layout_margin="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
-        android:background="@color/colorPrimaryDark"
+        android:background="@android:color/transparent"
         android:text="start"
         android:textColor="@android:color/white"
         android:visibility="visible" />
 </LinearLayout>
+    </android.support.v7.widget.CardView>
 </RelativeLayout>

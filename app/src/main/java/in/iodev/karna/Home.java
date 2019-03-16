@@ -66,6 +66,8 @@ public class Home extends AppCompatActivity {
         }
 
         preferences=getDefaultSharedPreferences(getApplicationContext());
+
+        percent="75";
         running=preferences.getBoolean("running",false);
         if(running)
         {
@@ -80,7 +82,7 @@ public class Home extends AppCompatActivity {
         generate=findViewById(R.id.generate);
         name=findViewById(R.id.username);
         percentage=findViewById(R.id.percent);
-        if(preferences.contains("firstsignin"))
+        if(preferences.getBoolean("firstsignin",false))
         {
             percent="25";
             JSONObject items=new JSONObject();

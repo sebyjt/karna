@@ -48,7 +48,7 @@ public class LoginActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestIdToken("791941464258-1rrlb8d72ug6q5gira8h5du3a05st56h.apps.googleusercontent.com")
                 .requestEmail()
                 .build();
 
@@ -95,6 +95,12 @@ public class LoginActivity extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     SharedPreferences.Editor editor=preferences.edit();
                     editor.putString("user", firebaseAuth.getCurrentUser().getDisplayName());
+                    Toast.makeText(getApplicationContext(), firebaseAuth.getCurrentUser().getDisplayName(), Toast.LENGTH_SHORT).show();
+                    boolean newuser=task.getResult().getAdditionalUserInfo().isNewUser();
+                    if(newuser)
+                    {
+                        preferences.edit().putBoolean("firstsignin",true);
+                    }
                     editor.commit();
                     startActivity(new Intent(getApplicationContext(), Home.class));
                     finish();
