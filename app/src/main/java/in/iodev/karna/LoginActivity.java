@@ -1,6 +1,7 @@
 package in.iodev.karna;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
@@ -26,18 +27,21 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
 
+import static android.preference.PreferenceManager.getDefaultSharedPreferences;
+
 public class LoginActivity extends AppCompatActivity {
 
     private static final int RC_SIGN_IN = 9001;
     private SignInButton signInButton;
     FirebaseAuth firebaseAuth;
+    SharedPreferences preferences;
     GoogleSignInClient mGoogleSignInClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
+        preferences=getDefaultSharedPreferences(getApplicationContext());
         signInButton = (SignInButton) findViewById(R.id.sign_in_button);
 
         // Initialize Firebase Auth
@@ -58,8 +62,8 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         if(firebaseAuth.getCurrentUser()!=null){
-//            startActivity(new Intent(getApplicationContext(),Home.class));
-            startActivity(new Intent(getApplicationContext(),service_main.class));
+            startActivity(new Intent(getApplicationContext(),Home.class));
+//            startActivity(new Intent(getApplicationContext(),service_main.class));
         }
 
     }
@@ -89,6 +93,9 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
+                    SharedPreferences.Editor editor=preferences.edit();
+                    editor.putString("user", firebaseAuth.getCurrentUser().getDisplayName());
+                    editor.commit();
                     startActivity(new Intent(getApplicationContext(), Home.class));
                     finish();
                 } else {

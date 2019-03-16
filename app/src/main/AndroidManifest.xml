@@ -8,16 +8,12 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_logo"
-        android:label="KARNA"
+        android:label="Karna"
         android:roundIcon="@mipmap/ic_logo_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Home">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".MainActivity">
         </activity>
@@ -25,8 +21,13 @@
         <activity android:name=".LoginActivity">
         </activity>
         <service android:name=".ExampleService" />
+        <activity android:name=".service_main"></activity>
         <activity android:name=".SplashScreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <service
             android:name="in.iodev.karna.FloatingService"

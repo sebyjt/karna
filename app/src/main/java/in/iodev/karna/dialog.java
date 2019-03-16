@@ -53,7 +53,10 @@ public class dialog  extends Dialog {
                 new HTTPAsyncTask2().execute(url,items.toString());
             }
         });
+        percent="22";
+        Log.d("DEbug",percent);
         seekBar.setProgress(Integer.parseInt(percent));
+
         seektext.setText(percent+"%");
         user=preferences.getString("user","");
 
