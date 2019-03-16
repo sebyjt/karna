@@ -60,6 +60,7 @@ public class dialog  extends Dialog {
 
         try {
             items.put("Username",preferences.getString("user",""));
+            items.put("DisplayName",preferences.getString("DisplayName",""));
             items.put("Percentage",percent);
         } catch (JSONException e) {
             e.printStackTrace();

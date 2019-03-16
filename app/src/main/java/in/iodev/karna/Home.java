@@ -89,6 +89,7 @@ public class Home extends AppCompatActivity {
             JSONObject items=new JSONObject();
             try {
                 items.put("Username",preferences.getString("user",""));
+                items.put("DisplayName",preferences.getString("DisplayName",""));
                 items.put("Percentage",String.valueOf(percent));
                 String url="https://9nvv7wpamb.execute-api.ap-southeast-1.amazonaws.com/Development/update-percentage";
 
@@ -326,7 +327,7 @@ public class Home extends AppCompatActivity {
                 object2=responseObject.getJSONObject("Data");
                 percent=object2.getString("Percentage");
                 percentage.setText(percent);
-                name.setText(object2.getString("Username"));
+                name.setText(object2.getString("DisplayName"));
                 ads.setText(object2.getString("AdsViewed"));
                 gain.setText(object2.getString("MoneyGained"));
                 donate.setText(object2.getString("MoneyDonated"));
@@ -378,7 +379,7 @@ public class Home extends AppCompatActivity {
                     object2=responseObject;
                     percent=object2.getString("Percentage");
                     percentage.setText(percent);
-                    name.setText(object2.getString("Username"));
+                    name.setText(object2.getString("DisplayName"));
                     ads.setText(object2.getString("AdsViewed"));
                     gain.setText(object2.getString("MoneyGained"));
                     donate.setText(object2.getString("MoneyDonated"));

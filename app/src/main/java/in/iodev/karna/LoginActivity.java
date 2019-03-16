@@ -78,10 +78,13 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        Log.d("Debug",String.valueOf(requestCode));
         if(requestCode==RC_SIGN_IN){
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            Log.d("Debug",result.getStatus().toString());
             if(result.isSuccess()){
                 GoogleSignInAccount account = result.getSignInAccount();
+                Log.d("Debug",account.getId());
                 authWithGoogle(account);
             }
         }
@@ -94,7 +97,8 @@ public class LoginActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     SharedPreferences.Editor editor=preferences.edit();
-                    editor.putString("user", firebaseAuth.getCurrentUser().getDisplayName());
+                    editor.putString("DisplayName", firebaseAuth.getCurrentUser().getDisplayName());
+                    editor.putString("user", firebaseAuth.getCurrentUser().getUid());
                     Toast.makeText(getApplicationContext(), firebaseAuth.getCurrentUser().getDisplayName(), Toast.LENGTH_SHORT).show();
                     boolean newuser=task.getResult().getAdditionalUserInfo().isNewUser();
                     if(newuser)
